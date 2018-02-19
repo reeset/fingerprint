@@ -1,4 +1,7 @@
-/* 
+     //using System;
+     //using System.Collections.Generic;  //List<>
+     //using System.Text;  //StringBuilder
+     /* 
      * Derived from https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth
      * https://github.com/OpenRefine/OpenRefine/blob/master/main/src/com/google/refine/clustering/binning/FingerprintKeyer.java
      * 
