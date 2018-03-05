@@ -14,20 +14,31 @@
 
 
 
-    public static string fingerprint(this string s)
+        public static string fingerprint(this string s)
         {
             if (string.IsNullOrEmpty(s))
             {
                 return null;
             }
-            s = s.Trim().ToLower(); // trim string and turn lower case            
+            s = s.Trim().ToLower(); // trim string and turn lower case  
+            //remove subfields
+            if (s.StartsWith("$"))
+            {
+                s = s.Substring(2);
+                s = System.Text.RegularExpressions.Regex.Replace(s, @"\$[0-9a-z]", "");
+            }
+
+            s = s.Replace(" ", "_me_marcedit_space_");
             s = Regex.Replace(s, punctctrl, "", RegexOptions.CultureInvariant); // then remove all punctuation and control chars
+            s = s.Replace("_me_marcedit_space_", " ");
+
+
             s = asciify(s); // find ASCII equivalent to characters
             string[] frags = s.Split(" ".ToCharArray()); //split on whitespace to get tokens
             List<string> set = new List<string>();
             foreach (string ss in frags)
             {
-                if (set.Contains(ss)==false)
+                if (set.Contains(ss) == false)
                 {
                     set.Add(ss);
                 }
@@ -36,7 +47,7 @@
             set.Sort();
             StringBuilder b = new StringBuilder();
             int iEnd = set.Count - 1;
-            for (int x=0; x < set.Count; x++)
+            for (int x = 0; x < set.Count; x++)
             {
                 b.Append(set[x]);
                 if (x != iEnd) { b.Append(' '); }
